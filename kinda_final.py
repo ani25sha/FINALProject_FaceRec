@@ -74,11 +74,11 @@ while True:
 
 while True:
     _,frame = video_capture.read()#video input reading
-    small_frame = cv2.resize(frame,(0,0),fx=0.25,fy=0.25)#decreasing the size
+    small_frame = cv2.resize(frame,(0,0),fx=0.25,fy=0.25)#decreasing the size of the frame to 25%
     rgb_small_frame = small_frame[:,:,::-1]#bgr-->rgb
     if s :
-        face_locations = face_recognition.face_locations(rgb_small_frame)#recognises presence o f a face in the frame
-        face_encodings = face_recognition.face_encodings(rgb_small_frame,face_locations)#store the dat of the coming frame
+        face_locations = face_recognition.face_locations(rgb_small_frame)#recognises presence of a face in the frame
+        face_encodings = face_recognition.face_encodings(rgb_small_frame,face_locations)#store the data of the coming frame
         face_names=[]
         for face_encoding in face_encodings:
             matches = face_recognition.compare_faces(known_faces_encoding,face_encoding)
@@ -92,7 +92,7 @@ while True:
             if name in known_faces_name:
                 if name in Room:
                     Room.remove(name)
-                    print(Room)
+                    print(Room) # in future print(name)
                     if name != "Unknown":  #runs for those who do not belong to the room
                         sweep(120)
                         sweep(-120)
